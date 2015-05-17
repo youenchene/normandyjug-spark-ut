@@ -15,7 +15,6 @@ object DataProcess {
 
   def classicProcess(itemsRdd: RDD[Item]): RDD[(String,Double)] = {
    val p=itemsRdd.map(item => (item.category,item.price)).mapValues(x=>(x,1)).reduceByKey((x,y) => (x._1 + y._1, x._2 + y._2))
-   p.collect().foreach(println)
     p.mapValues(x=>(x._1 / x._2));
   }
 
